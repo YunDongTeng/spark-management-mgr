@@ -1,0 +1,27 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="hidden-xs" id="SiteSectionTableToolbar" role="group">
+                            @if(shiro.hasPermission("/siteSection/add")){
+                            <#button name="保存" icon="fa-plus" clickFun="SiteSectionBind.bind()"/>
+                            @}
+                        </div>
+                        <#table id="SiteSectionBindTable"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modules/siteSection/siteSectionBind.js"></script>
+<script>
+    var SiteSectionBindDefaultParam = {
+        "siteId": '${siteId}',
+        "type": 0
+    }
+</script>
+@}

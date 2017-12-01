@@ -1,0 +1,28 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="hidden-xs" id="GradeSubjectTableToolbar" role="group">
+                            @if(shiro.hasPermission("/gradeSubject/add")){
+                            <#button name="保存" icon="fa-plus" clickFun="GradeSubjectBind.bind()"/>
+                            @}
+                        </div>
+                        <#table id="GradeSubjectBindTable"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modules/gradeSubject/gradeSubjectBind.js"></script>
+<script>
+    var gradeSubjectBindDefaultParam = {
+        "siteSectionId": '${siteSectionId}',
+        "gradeId": '${gradeId}',
+        "type": 0
+    }
+</script>
+@}

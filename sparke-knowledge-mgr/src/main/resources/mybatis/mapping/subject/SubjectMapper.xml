@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sparke.modules.subject.mapper.SubjectMapper">
+    <insert id="insert">
+        INSERT INTO tb_subject
+        (
+            id,
+            name,
+            sort,
+            create_date,
+            create_by,
+            update_date,
+            update_by,
+            del_flag
+        )
+        VALUES
+        (
+               #{id},
+               #{name},
+               #{sort},
+               #{createDate},
+               #{createBy},
+               #{updateDate},
+               #{updateBy},
+               #{delFlag}
+        )
+    </insert>
+    <update id="update">
+        update tb_subject
+        set
+                id = #{id}
+                <if test="name!=null">
+                   ,name = #{name}
+                </if>
+                <if test="sort!=null">
+                   ,sort = #{sort}
+                </if>
+                <if test="createDate!=null">
+                   ,create_date = #{createDate}
+                </if>
+                <if test="createBy!=null">
+                   ,create_by = #{createBy}
+                </if>
+                <if test="updateDate!=null">
+                   ,update_date = #{updateDate}
+                </if>
+                <if test="updateBy!=null">
+                   ,update_by = #{updateBy}
+                </if>
+                <if test="delFlag!=null">
+                   ,del_flag = #{delFlag}
+                </if>
+        where id = #{id}
+    </update>
+
+    <select id="findList" resultType="cn.sparke.modules.subject.entity.SubjectEntity">
+        select
+              tb_subject.id,
+              tb_subject.name,
+              tb_subject.sort,
+              tb_subject.create_date,
+              tb_subject.create_by,
+              tb_subject.update_date,
+              tb_subject.update_by,
+              tb_subject.del_flag
+         from tb_subject
+        where 1=1
+            <if test="id!=null and id!=''">
+              and  tb_subject.id = #{id}
+            </if>
+            <if test="name!=null and name!=''">
+              and  tb_subject.name = #{name}
+            </if>
+            <if test="sort!=null and sort!=''">
+              and  tb_subject.sort = #{sort}
+            </if>
+            <if test="createDate!=null and createDate!=''">
+              and  tb_subject.create_date = #{createDate}
+            </if>
+            <if test="createBy!=null and createBy!=''">
+              and  tb_subject.create_by = #{createBy}
+            </if>
+            <if test="updateDate!=null and updateDate!=''">
+              and  tb_subject.update_date = #{updateDate}
+            </if>
+            <if test="updateBy!=null and updateBy!=''">
+              and  tb_subject.update_by = #{updateBy}
+            </if>
+                and  tb_subject.del_flag = 0
+    </select>
+
+
+    <select id="getById" resultType="cn.sparke.modules.subject.entity.SubjectEntity">
+        select
+              tb_subject.id,
+              tb_subject.name,
+              tb_subject.sort,
+              tb_subject.create_date,
+              tb_subject.create_by,
+              tb_subject.update_date,
+              tb_subject.update_by,
+              tb_subject.del_flag
+        from tb_subject
+        where id = #{id}
+            and  tb_subject.del_flag = 0
+    </select>
+
+    <select id="get" resultType="cn.sparke.modules.subject.entity.SubjectEntity">
+        select
+              tb_subject.id,
+              tb_subject.name,
+              tb_subject.sort,
+              tb_subject.create_date,
+              tb_subject.create_by,
+              tb_subject.update_date,
+              tb_subject.update_by,
+              tb_subject.del_flag
+        from tb_subject
+        where 1=1
+            <if test="id!=null and id!=''">
+                and  tb_subject.id = #{id}
+            </if>
+            <if test="name!=null and name!=''">
+                and  tb_subject.name = #{name}
+            </if>
+            <if test="sort!=null and sort!=''">
+                and  tb_subject.sort = #{sort}
+            </if>
+            <if test="createDate!=null and createDate!=''">
+                and  tb_subject.create_date = #{createDate}
+            </if>
+            <if test="createBy!=null and createBy!=''">
+                and  tb_subject.create_by = #{createBy}
+            </if>
+            <if test="updateDate!=null and updateDate!=''">
+                and  tb_subject.update_date = #{updateDate}
+            </if>
+            <if test="updateBy!=null and updateBy!=''">
+                and  tb_subject.update_by = #{updateBy}
+            </if>
+            and  tb_subject.del_flag = 0
+         limit 1
+     </select>
+
+      <update id="deleteById">
+            update tb_subject
+            set del_flag = 1
+            where id = #{id}
+      </update>
+</mapper>

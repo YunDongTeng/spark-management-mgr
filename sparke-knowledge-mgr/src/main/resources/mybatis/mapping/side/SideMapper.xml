@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sparke.modules.side.mapper.SideMapper">
+    <insert id="insert">
+        INSERT INTO tb_side
+        (
+            id,
+            name,
+            url,
+            sort,
+            create_date,
+            create_by,
+            update_date,
+            update_by,
+            del_flag
+        )
+        VALUES
+        (
+               #{id},
+               #{name},
+               #{url},
+               #{sort},
+               #{createDate},
+               #{createBy},
+               #{updateDate},
+               #{updateBy},
+               #{delFlag}
+        )
+    </insert>
+    <update id="update">
+        update tb_side
+        set
+                id = #{id}
+                <if test="name!=null">
+                   ,name = #{name}
+                </if>
+                <if test="url!=null">
+                   ,url = #{url}
+                </if>
+                <if test="sort!=null">
+                   ,sort = #{sort}
+                </if>
+                <if test="createDate!=null">
+                   ,create_date = #{createDate}
+                </if>
+                <if test="createBy!=null">
+                   ,create_by = #{createBy}
+                </if>
+                <if test="updateDate!=null">
+                   ,update_date = #{updateDate}
+                </if>
+                <if test="updateBy!=null">
+                   ,update_by = #{updateBy}
+                </if>
+                <if test="delFlag!=null">
+                   ,del_flag = #{delFlag}
+                </if>
+        where id = #{id}
+    </update>
+
+    <select id="findList" resultType="cn.sparke.modules.side.entity.SideEntity">
+        select
+              tb_side.id,
+              tb_side.name,
+              tb_side.url,
+              tb_side.sort,
+              tb_side.create_date,
+              tb_side.create_by,
+              tb_side.update_date,
+              tb_side.update_by,
+              tb_side.del_flag
+         from tb_side
+        where 1=1
+            <if test="id!=null and id!=''">
+              and  tb_side.id = #{id}
+            </if>
+            <if test="name!=null and name!=''">
+              and  tb_side.name = #{name}
+            </if>
+            <if test="url!=null and url!=''">
+              and  tb_side.url = #{url}
+            </if>
+            <if test="sort!=null and sort!=''">
+              and  tb_side.sort = #{sort}
+            </if>
+            <if test="createDate!=null and createDate!=''">
+              and  tb_side.create_date = #{createDate}
+            </if>
+            <if test="createBy!=null and createBy!=''">
+              and  tb_side.create_by = #{createBy}
+            </if>
+            <if test="updateDate!=null and updateDate!=''">
+              and  tb_side.update_date = #{updateDate}
+            </if>
+            <if test="updateBy!=null and updateBy!=''">
+              and  tb_side.update_by = #{updateBy}
+            </if>
+                and  tb_side.del_flag = 0
+    </select>
+
+
+    <select id="getById" resultType="cn.sparke.modules.side.entity.SideEntity">
+        select
+              tb_side.id,
+              tb_side.name,
+              tb_side.url,
+              tb_side.sort,
+              tb_side.create_date,
+              tb_side.create_by,
+              tb_side.update_date,
+              tb_side.update_by,
+              tb_side.del_flag
+        from tb_side
+        where id = #{id}
+            and  tb_side.del_flag = 0
+    </select>
+
+    <select id="get" resultType="cn.sparke.modules.side.entity.SideEntity">
+        select
+              tb_side.id,
+              tb_side.name,
+              tb_side.url,
+              tb_side.sort,
+              tb_side.create_date,
+              tb_side.create_by,
+              tb_side.update_date,
+              tb_side.update_by,
+              tb_side.del_flag
+        from tb_side
+        where 1=1
+            <if test="id!=null and id!=''">
+                and  tb_side.id = #{id}
+            </if>
+            <if test="name!=null and name!=''">
+                and  tb_side.name = #{name}
+            </if>
+            <if test="url!=null and url!=''">
+                and  tb_side.url = #{url}
+            </if>
+            <if test="sort!=null and sort!=''">
+                and  tb_side.sort = #{sort}
+            </if>
+            <if test="createDate!=null and createDate!=''">
+                and  tb_side.create_date = #{createDate}
+            </if>
+            <if test="createBy!=null and createBy!=''">
+                and  tb_side.create_by = #{createBy}
+            </if>
+            <if test="updateDate!=null and updateDate!=''">
+                and  tb_side.update_date = #{updateDate}
+            </if>
+            <if test="updateBy!=null and updateBy!=''">
+                and  tb_side.update_by = #{updateBy}
+            </if>
+            and  tb_side.del_flag = 0
+         limit 1
+     </select>
+
+      <update id="deleteById">
+            update tb_side
+            set del_flag = 1
+            where id = #{id}
+      </update>
+</mapper>

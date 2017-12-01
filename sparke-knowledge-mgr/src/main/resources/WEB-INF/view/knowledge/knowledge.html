@@ -1,0 +1,27 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>知识点</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row">
+
+                        </div>
+                        <div class="hidden-xs" id="KnowledgeTableToolbar" role="group">
+                            <#button name="添加" icon="fa-plus" clickFun="Knowledge.add()"/>
+                            <#button name="修改" icon="fa-pencil" clickFun="Knowledge.openDetail()" space="true"/>
+                            <#button name="删除" icon="fa-trash" clickFun="Knowledge.delete()" space="true"/>
+                        </div>
+                        <#table id="KnowledgeTable"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modules/knowledge/knowledge.js"></script>
+@}

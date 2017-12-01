@@ -1,0 +1,33 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="hidden-xs" id="SiteSectionTableToolbar" role="group">
+                            @if(shiro.hasPermission("/siteSection/add")){
+                            <#button name="关联学段" icon="fa-plus" clickFun="SiteSection.openAddSiteSection()"/>
+                            @}
+                            @if(shiro.hasPermission("/siteSection/delete")){
+                            <#button name="解除关联" icon="fa-trash" clickFun="SiteSection.delete()" space="true"/>
+                            @}
+                        </div>
+                        <#table id="SiteSectionTable"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modules/siteSection/siteSection.js"></script>
+<script>
+    var siteSectionDefaultParam = {
+        "siteId": '${siteId}',
+        "type": 1
+    }
+    var siteSectionPermission = {
+        relationSubject: ${shiro.hasPermission("/gradeSubject/relationSubject")}
+    }
+</script>
+@}

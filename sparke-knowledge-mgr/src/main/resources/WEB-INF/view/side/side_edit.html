@@ -1,0 +1,22 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal"  id="sideForm">
+
+            <input type="hidden" id="id" value="${side.id}">
+
+            <#input id="name" name="网站名称" underline="true"  value="${side.name}" />
+            <#input id="url" name="网站地址" underline="true"   value="${side.url}"/>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10" style="text-align: center;">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="SideInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="SideInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modules/side/side_info.js"></script>
+@}

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.sparke.modules.knowledge.mapper.KnowledgeMapper">
+
+
+    <select id="findList" parameterType="cn.sparke.modules.knowledge.entity.KnowledgeEntity"
+            resultType="cn.sparke.modules.knowledge.entity.KnowledgeEntity">
+        SELECT * FROM tb_knowledge
+        <where>
+            1 = 1
+            <if test="siteId !=null">
+                and site_id = #{siteId}
+            </if>
+            <if test="sectionId !=null">
+                and section_id = #{sectionId}
+            </if>
+            <if test="gradeId !=null">
+                and grade_id = #{gradeId}
+            </if>
+            <if test="subjectId !=null">
+                and subject_id = #{subjectId}
+            </if>
+            <if test="chapterId !=null">
+                and chapter_id = #{chapterId}
+            </if>
+            <if test="categoryId !=null">
+                and category_id = #{categoryId}
+            </if>
+
+            <if test="name !=null">
+                and `name` = #{name}
+            </if>
+            <if test="status !=null">
+                and status = #{status}
+            </if>
+        </where>
+        and del_flag = 0
+        ORDER BY create_date DESC
+    </select>
+
+    <select id="getById" parameterType="String" resultType="cn.sparke.modules.knowledge.entity.KnowledgeEntity">
+          SELECT * FROM tb_knowledge where id = #{id} and del_flag = 0 limit 1
+    </select>
+
+    <insert id="insert" parameterType="cn.sparke.modules.knowledge.entity.KnowledgeEntity">
+        insert into tb_knowledge
+        (id,site_id,section_id,grade_id,subject_id,chapter_id,category_id,`name`,frequency,description,status,sort,create_by,create_date,update_by,update_date,del_flag)
+        values
+        (#{id},#{siteId},#{sectionId},#{gradeId},#{subjectId},#{chapterId},#{categoryId},#{name},#{frequency},#{description},
+         #{status},#{sort},#{createBy},#{createDate},#{updateBy},#{updateDate},#{delFlag})
+    </insert>
+
+    <update id="update" parameterType="cn.sparke.modules.knowledge.entity.KnowledgeEntity">
+        update tb_knowledge set id = #{id}
+        <if test="siteId !=null">
+            ,site_id = #{siteId}
+        </if>
+        <if test="sectionId !=null">
+            ,section_id = #{sectionId}
+        </if>
+        <if test="gradeId !=null">
+            ,grade_id = #{gradeId}
+        </if>
+        <if test="subjectId !=null">
+            ,subject_id = #{subjectId}
+        </if>
+        <if test="chapterId !=null">
+            ,chapter_id = #{chapterId}
+        </if>
+        <if test="categoryId !=null">
+            ,category_id = #{categoryId}
+        </if>
+        <if test="name !=null">
+            ,`name` = #{name}
+        </if>
+        <if test="status !=null">
+            ,status = #{status}
+        </if>
+        <if test="frequency !=null">
+            ,frequency = #{frequency}
+        </if>
+        <if test="description !=null">
+            ,description = #{description}
+        </if>
+        <if test="sort !=null">
+            ,sort = #{sort}
+        </if>
+        <if test="updateDate!=null">
+            ,update_date = #{updateDate}
+        </if>
+        <if test="updateBy!=null">
+            ,update_by = #{updateBy}
+        </if>
+        <if test="delFlag!=null">
+            ,del_flag = #{delFlag}
+        </if>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteById" parameterType="String">
+        update tb_knowledge set del_flag = 1 where id = #{id}
+    </delete>
+
+    <resultMap id="TreeMap" type="cn.sparke.modules.side.entity.SideEntity">
+        <id property="id" column="siteId"/>
+        <result column="siteName" property="name"/>
+        
+        <collection property="sectionList" javaType="java.util.List" ofType="cn.sparke.modules.sectionGrade.entity.SectionGradeEntity">
+            <id property="id" column="sectionId"/>
+            <result property="name" column="sectionName"/>
+            <collection property="gradeList" ofType="cn.sparke.modules.sectionGrade.entity.SectionGradeEntity" javaType="java.util.List">
+                <id property="id" column="gradeId"/>
+                <result property="name" column="gradeName"/>
+                <collection property="subjectList" javaType="java.util.List" ofType="cn.sparke.modules.subject.entity.SubjectEntity">
+                    <id property="id" column="subjectId"/>
+                    <result property="name" column="subjectName"/>
+                    <collection property="chapterList" ofType="cn.sparke.modules.chapter.entity.ChapterEntity" javaType="java.util.List">
+                        <id property="id" column="chapterId"/>
+                        <result property="name" column="chapterName"/>
+                    </collection>
+                </collection>
+            </collection>
+        </collection>
+
+    </resultMap>
+
+    <select id="getTreeList" resultMap="TreeMap">
+
+        select
+          ts.id as siteId,ts.name as siteName,
+          tsg.id as sectionId,tsg.name sectionName,
+          tsg2.id as gradeId,tsg2.name as gradeName,
+          tsub.id as subjectId,tsub.name as subjectName,
+          tc.id as chapterId,tc.name as chapterName
+          from tb_side ts
+          left join tb_site_section tss on ts.id = tss.site_id and ts.del_flag = 0
+          left join tb_section_grade tsg on tsg.id = tss.section_id and tsg.del_flag = 0
+          left join tb_section_grade tsg2 on tsg2.parent_id = tsg.id and tsg2.del_flag = 0
+          left join tb_grade_subject tgs on tgs.grade_id = tsg2.id and tgs.del_flag = 0
+          left join tb_subject tsub on tgs.subject_id = tsub.id and tsub.del_flag = 0
+          left join tb_chapter tc on tc.subject_id = tsub.id and tc.del_flag = 0
+
+    </select>
+
+</mapper>

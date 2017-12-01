@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sparke.modules.siteSection.mapper.SiteSectionMapper">
+    <insert id="insert">
+        INSERT INTO tb_site_section
+        (
+            id,
+            site_id,
+            section_id,
+            sort,
+            create_date,
+            create_by,
+            update_date,
+            update_by,
+            del_flag
+        )
+        VALUES
+            (
+                #{id},
+                #{siteId},
+                #{sectionId},
+                #{sort},
+                #{createDate},
+                #{createBy},
+                #{updateDate},
+                #{updateBy},
+                #{delFlag}
+            )
+    </insert>
+    <update id="update">
+        update tb_site_section
+        set
+        id = #{id}
+        <if test="siteId!=null">
+            ,site_id = #{siteId}
+        </if>
+        <if test="sectionId!=null">
+            ,section_id = #{sectionId}
+        </if>
+        <if test="sort!=null">
+            ,sort = #{sort}
+        </if>
+        <if test="createDate!=null">
+            ,create_date = #{createDate}
+        </if>
+        <if test="createBy!=null">
+            ,create_by = #{createBy}
+        </if>
+        <if test="updateDate!=null">
+            ,update_date = #{updateDate}
+        </if>
+        <if test="updateBy!=null">
+            ,update_by = #{updateBy}
+        </if>
+        <if test="delFlag!=null">
+            ,del_flag = #{delFlag}
+        </if>
+        where id = #{id}
+    </update>
+
+    <select id="findList" resultType="cn.sparke.modules.siteSection.entity.SiteSectionEntity">
+        select
+        tb_site_section.id,
+        tb_site_section.site_id,
+        tb_site_section.section_id,
+        tb_site_section.sort,
+        tb_site_section.create_date,
+        tb_site_section.create_by,
+        tb_site_section.update_date,
+        tb_site_section.update_by,
+        tb_site_section.del_flag
+        from tb_site_section
+        where 1=1
+        <if test="id!=null and id!=''">
+            and tb_site_section.id = #{id}
+        </if>
+        <if test="siteId!=null and siteId!=''">
+            and tb_site_section.site_id = #{siteId}
+        </if>
+        <if test="sectionId!=null and sectionId!=''">
+            and tb_site_section.section_id = #{sectionId}
+        </if>
+        <if test="sort!=null and sort!=''">
+            and tb_site_section.sort = #{sort}
+        </if>
+        <if test="createDate!=null and createDate!=''">
+            and tb_site_section.create_date = #{createDate}
+        </if>
+        <if test="createBy!=null and createBy!=''">
+            and tb_site_section.create_by = #{createBy}
+        </if>
+        <if test="updateDate!=null and updateDate!=''">
+            and tb_site_section.update_date = #{updateDate}
+        </if>
+        <if test="updateBy!=null and updateBy!=''">
+            and tb_site_section.update_by = #{updateBy}
+        </if>
+        and tb_site_section.del_flag = 0
+    </select>
+
+
+    <select id="getById" resultType="cn.sparke.modules.siteSection.entity.SiteSectionEntity">
+        SELECT
+            tb_site_section.id,
+            tb_site_section.site_id,
+            tb_site_section.section_id,
+            tb_site_section.sort,
+            tb_site_section.create_date,
+            tb_site_section.create_by,
+            tb_site_section.update_date,
+            tb_site_section.update_by,
+            tb_site_section.del_flag
+        FROM tb_site_section
+        WHERE id = #{id}
+              AND tb_site_section.del_flag = 0
+    </select>
+
+    <select id="get" resultType="cn.sparke.modules.siteSection.entity.SiteSectionEntity">
+        select
+        tb_site_section.id,
+        tb_site_section.site_id,
+        tb_site_section.section_id,
+        tb_site_section.sort,
+        tb_site_section.create_date,
+        tb_site_section.create_by,
+        tb_site_section.update_date,
+        tb_site_section.update_by,
+        tb_site_section.del_flag
+        from tb_site_section
+        where 1=1
+        <if test="id!=null and id!=''">
+            and tb_site_section.id = #{id}
+        </if>
+        <if test="siteId!=null and siteId!=''">
+            and tb_site_section.site_id = #{siteId}
+        </if>
+        <if test="sectionId!=null and sectionId!=''">
+            and tb_site_section.section_id = #{sectionId}
+        </if>
+        <if test="sort!=null and sort!=''">
+            and tb_site_section.sort = #{sort}
+        </if>
+        <if test="createDate!=null and createDate!=''">
+            and tb_site_section.create_date = #{createDate}
+        </if>
+        <if test="createBy!=null and createBy!=''">
+            and tb_site_section.create_by = #{createBy}
+        </if>
+        <if test="updateDate!=null and updateDate!=''">
+            and tb_site_section.update_date = #{updateDate}
+        </if>
+        <if test="updateBy!=null and updateBy!=''">
+            and tb_site_section.update_by = #{updateBy}
+        </if>
+        and tb_site_section.del_flag = 0
+        limit 1
+    </select>
+
+    <update id="deleteById">
+        UPDATE tb_site_section
+        SET del_flag = 1
+        WHERE id = #{id}
+    </update>
+    <select id="findBindList" resultType="cn.sparke.modules.siteSection.entity.SiteSectionEntity">
+        SELECT
+            tss.id,
+            sg.name,
+            sg.level,
+            sg.parent_id AS sectionGradeParentId,
+            sg.id        AS sectionGradeId
+        FROM tb_site_section
+             tss INNER JOIN tb_section_grade sg
+                ON (tss.section_id = sg.id OR tss.section_id = sg.parent_id) AND sg.del_flag = 0
+        WHERE tss.site_id = #{siteId}
+              AND tss.del_flag = 0
+    </select>
+
+    <select id="findUnbindList" resultType="cn.sparke.modules.siteSection.entity.SiteSectionEntity">
+        SELECT
+            sg.id,
+            sg.name,
+            sg.level,
+            sg.parent_id AS sectionGradeParentId
+        FROM tb_section_grade sg
+        WHERE NOT exists(SELECT 1
+                         FROM tb_site_section ss
+                         WHERE (sg.id = ss.section_id OR sg.parent_id = ss.section_id) AND ss.site_id = #{siteId} AND
+                               ss.del_flag = 0)
+              AND sg.del_flag = 0
+    </select>
+
+    <insert id="batchInsert" parameterType="java.util.List">
+        INSERT INTO tb_site_section
+        (
+        id, site_id, section_id, create_date, create_by, update_date, update_by, del_flag
+        )
+        values
+        <foreach collection="list" index="index" item="item" separator=",">
+            (
+            #{item.id},
+            #{item.siteId},
+            #{item.sectionId},
+            #{item.createDate},
+            #{item.createBy},
+            #{item.updateDate},
+            #{item.updateBy},
+            #{item.delFlag}
+            )
+        </foreach>
+    </insert>
+</mapper>

@@ -1,0 +1,142 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-content">
+                <div class="form-horizontal" id="sideForm">
+
+                    <div class="row">
+                        <div class="col-sm-6 b-r">
+                            <div class="form-group" style="vertical-align: middle">
+                                <label class="col-sm-2 control-label">网站</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="siteId" name="siteId"
+                                            onchange="KnowledgeInfoDlg.getSectionBySite()">
+                                        @ if(siteList !=null){
+                                        @ for(site in siteList){
+                                        <option value="${site.id}">${site.name}</option>
+                                        @ }
+                                        @ }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 b-r">
+                            <div class="form-group" style="vertical-align: middle">
+                                <label class="col-sm-2 control-label">学段</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="sectionId" name="sectionId">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 b-r">
+                            <div class="form-group" style="vertical-align: middle">
+                                <label class="col-sm-2 control-label">年级</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="gradeId" name="gradeId">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 b-r">
+                            <div class="form-group" style="vertical-align: middle">
+                                <label class="col-sm-2 control-label">科目</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="subjectId" name="subjectId">
+                                        <option value="1">111</option>
+                                        <option value="2">222</option>
+                                    </select></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6 b-r">
+                            <div class="form-group" style="vertical-align: middle">
+                                <label class="col-sm-2 control-label">章节</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="chapterId" name="chapterId">
+                                        <option value="1">111</option>
+                                        <option value="2">222</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 b-r">
+                            <div class="form-group" style="vertical-align: middle">
+                                <label class="col-sm-2 control-label">分类</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="categoryId" name="categoryId">
+                                        <option value="1">111</option>
+                                        <option value="2">222</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group" style="vertical-align: middle">
+                                <#input id="name" name="名称"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group" style="vertical-align: middle">
+                                <label class="col-sm-2 control-label">状态</label>
+                                <div class="col-sm-6">
+                                    <select class="form-control" id="status" name="status">
+                                        <option value="0">有效</option>
+                                        <option value="1">无效</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group" style="vertical-align: middle">
+                                <label class="col-sm-2 control-label">考频</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="frequency" name="frequency">
+                                        <option value="3">高</option>
+                                        <option value="2">中</option>
+                                        <option value="1">低</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group" style="vertical-align: middle">
+                                <#input id="description" name="知识点描述"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group" style="vertical-align: middle">
+                                <#input id="sort" name="自定义排序" underline="true"/>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row btn-group-m-t">
+                        <div class="col-sm-10" style="text-align: center;">
+                            <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="SideInfoDlg.addSubmit()"/>
+                            <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="SideInfoDlg.close()"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modules/knowledge/knowledge_info.js"></script>
+@}

@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sparke.modules.gradeSubject.mapper.GradeSubjectMapper">
+    <insert id="insert">
+        INSERT INTO tb_grade_subject
+        (
+            id,
+            site_section_id,
+            site_id,
+            section_id,
+            grade_id,
+            subject_id,
+            sort,
+            create_date,
+            create_by,
+            update_date,
+            update_by,
+            del_flag
+        )
+        VALUES
+            (
+                #{id},
+                #{siteSectionId},
+                #{siteId},
+                #{sectionId},
+                #{gradeId},
+                #{subjectId},
+                #{sort},
+                #{createDate},
+                #{createBy},
+                #{updateDate},
+                #{updateBy},
+                #{delFlag}
+            )
+    </insert>
+    <update id="update">
+        update tb_grade_subject
+        set
+        id = #{id}
+        <if test="siteSectionId!=null">
+            ,site_section_id = #{siteSectionId}
+        </if>
+        <if test="siteId!=null">
+            ,site_id = #{siteId}
+        </if>
+        <if test="sectionId!=null">
+            ,section_id = #{sectionId}
+        </if>
+        <if test="gradeId!=null">
+            ,grade_id = #{gradeId}
+        </if>
+        <if test="subjectId!=null">
+            ,subject_id = #{subjectId}
+        </if>
+        <if test="sort!=null">
+            ,sort = #{sort}
+        </if>
+        <if test="createDate!=null">
+            ,create_date = #{createDate}
+        </if>
+        <if test="createBy!=null">
+            ,create_by = #{createBy}
+        </if>
+        <if test="updateDate!=null">
+            ,update_date = #{updateDate}
+        </if>
+        <if test="updateBy!=null">
+            ,update_by = #{updateBy}
+        </if>
+        <if test="delFlag!=null">
+            ,del_flag = #{delFlag}
+        </if>
+        where id = #{id}
+    </update>
+
+    <select id="findList" resultType="cn.sparke.modules.gradeSubject.entity.GradeSubjectEntity">
+        select
+        tb_grade_subject.id,
+        tb_grade_subject.site_section_id,
+        tb_grade_subject.site_id,
+        tb_grade_subject.section_id,
+        tb_grade_subject.grade_id,
+        tb_grade_subject.subject_id,
+        tb_grade_subject.sort,
+        tb_grade_subject.create_date,
+        tb_grade_subject.create_by,
+        tb_grade_subject.update_date,
+        tb_grade_subject.update_by,
+        tb_grade_subject.del_flag
+        from tb_grade_subject
+        where 1=1
+        <if test="id!=null and id!=''">
+            and tb_grade_subject.id = #{id}
+        </if>
+        <if test="siteSectionId!=null and siteSectionId!=''">
+            and tb_grade_subject.site_section_id = #{siteSectionId}
+        </if>
+        <if test="siteId!=null and siteId!=''">
+            and tb_grade_subject.site_id = #{siteId}
+        </if>
+        <if test="sectionId!=null and sectionId!=''">
+            and tb_grade_subject.section_id = #{sectionId}
+        </if>
+        <if test="gradeId!=null and gradeId!=''">
+            and tb_grade_subject.grade_id = #{gradeId}
+        </if>
+        <if test="subjectId!=null and subjectId!=''">
+            and tb_grade_subject.subject_id = #{subjectId}
+        </if>
+        <if test="sort!=null and sort!=''">
+            and tb_grade_subject.sort = #{sort}
+        </if>
+        <if test="createDate!=null and createDate!=''">
+            and tb_grade_subject.create_date = #{createDate}
+        </if>
+        <if test="createBy!=null and createBy!=''">
+            and tb_grade_subject.create_by = #{createBy}
+        </if>
+        <if test="updateDate!=null and updateDate!=''">
+            and tb_grade_subject.update_date = #{updateDate}
+        </if>
+        <if test="updateBy!=null and updateBy!=''">
+            and tb_grade_subject.update_by = #{updateBy}
+        </if>
+        and tb_grade_subject.del_flag = 0
+    </select>
+
+
+    <select id="getById" resultType="cn.sparke.modules.gradeSubject.entity.GradeSubjectEntity">
+        SELECT
+            tb_grade_subject.id,
+            tb_grade_subject.site_section_id,
+            tb_grade_subject.site_id,
+            tb_grade_subject.section_id,
+            tb_grade_subject.grade_id,
+            tb_grade_subject.subject_id,
+            tb_grade_subject.sort,
+            tb_grade_subject.create_date,
+            tb_grade_subject.create_by,
+            tb_grade_subject.update_date,
+            tb_grade_subject.update_by,
+            tb_grade_subject.del_flag
+        FROM tb_grade_subject
+        WHERE id = #{id}
+              AND tb_grade_subject.del_flag = 0
+    </select>
+
+    <select id="get" resultType="cn.sparke.modules.gradeSubject.entity.GradeSubjectEntity">
+        select
+        tb_grade_subject.id,
+        tb_grade_subject.site_section_id,
+        tb_grade_subject.site_id,
+        tb_grade_subject.section_id,
+        tb_grade_subject.grade_id,
+        tb_grade_subject.subject_id,
+        tb_grade_subject.sort,
+        tb_grade_subject.create_date,
+        tb_grade_subject.create_by,
+        tb_grade_subject.update_date,
+        tb_grade_subject.update_by,
+        tb_grade_subject.del_flag
+        from tb_grade_subject
+        where 1=1
+        <if test="id!=null and id!=''">
+            and tb_grade_subject.id = #{id}
+        </if>
+        <if test="siteSectionId!=null and siteSectionId!=''">
+            and tb_grade_subject.site_section_id = #{siteSectionId}
+        </if>
+        <if test="siteId!=null and siteId!=''">
+            and tb_grade_subject.site_id = #{siteId}
+        </if>
+        <if test="sectionId!=null and sectionId!=''">
+            and tb_grade_subject.section_id = #{sectionId}
+        </if>
+        <if test="gradeId!=null and gradeId!=''">
+            and tb_grade_subject.grade_id = #{gradeId}
+        </if>
+        <if test="subjectId!=null and subjectId!=''">
+            and tb_grade_subject.subject_id = #{subjectId}
+        </if>
+        <if test="sort!=null and sort!=''">
+            and tb_grade_subject.sort = #{sort}
+        </if>
+        <if test="createDate!=null and createDate!=''">
+            and tb_grade_subject.create_date = #{createDate}
+        </if>
+        <if test="createBy!=null and createBy!=''">
+            and tb_grade_subject.create_by = #{createBy}
+        </if>
+        <if test="updateDate!=null and updateDate!=''">
+            and tb_grade_subject.update_date = #{updateDate}
+        </if>
+        <if test="updateBy!=null and updateBy!=''">
+            and tb_grade_subject.update_by = #{updateBy}
+        </if>
+        and tb_grade_subject.del_flag = 0
+        limit 1
+    </select>
+
+    <update id="deleteById">
+        UPDATE tb_grade_subject
+        SET del_flag = 1
+        WHERE id = #{id}
+    </update>
+
+
+    <select id="findBindList" resultType="cn.sparke.modules.gradeSubject.entity.GradeSubjectEntity">
+        SELECT
+            gs.id,
+            s.name
+        FROM tb_grade_subject gs
+            INNER JOIN tb_subject s
+                ON gs.subject_id = s.id
+        WHERE gs.del_flag = 0
+              AND site_section_id = #{siteSectionId}
+              AND grade_id = #{gradeId}
+              AND s.del_flag = 0
+    </select>
+
+    <select id="findUnbindList" resultType="cn.sparke.modules.gradeSubject.entity.GradeSubjectEntity">
+        SELECT
+            s.id,
+            s.name
+        FROM tb_subject s
+        WHERE s.del_flag = 0
+              AND NOT exists(SELECT 1
+                             FROM tb_grade_subject gs
+                             WHERE gs.site_section_id = #{siteSectionId} AND grade_id = #{gradeId} AND  gs.subject_id = s.id AND gs.del_flag = 0)
+    </select>
+
+    <insert id="batchInsert" parameterType="java.util.List">
+        INSERT INTO tb_grade_subject
+        (
+        id, site_section_id, site_id, section_id, grade_id, subject_id, create_date, create_by, update_date, update_by,
+        del_flag
+        )
+        values
+        <foreach collection="list" index="index" item="item" separator=",">
+            (
+            #{item.id},
+            #{item.siteSectionId},
+            #{item.siteId},
+            #{item.sectionId},
+            #{item.gradeId},
+            #{item.subjectId},
+            #{item.createDate},
+            #{item.createBy},
+            #{item.updateDate},
+            #{item.updateBy},
+            #{item.delFlag}
+            )
+        </foreach>
+    </insert>
+</mapper>

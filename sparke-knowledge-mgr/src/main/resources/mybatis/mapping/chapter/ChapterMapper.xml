@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sparke.modules.chapter.mapper.ChapterMapper">
+    <insert id="insert">
+        INSERT INTO tb_chapter
+        (
+            id,
+            grade_subject_id,
+            site_id,
+            section_id,
+            grade_id,
+            subject_id,
+            name,
+            sort,
+            create_date,
+            create_by,
+            update_date,
+            update_by,
+            del_flag
+        )
+        VALUES
+        (
+               #{id},
+               #{gradeSubjectId},
+               #{siteId},
+               #{sectionId},
+               #{gradeId},
+               #{subjectId},
+               #{name},
+               #{sort},
+               #{createDate},
+               #{createBy},
+               #{updateDate},
+               #{updateBy},
+               #{delFlag}
+        )
+    </insert>
+    <update id="update">
+        update tb_chapter
+        set
+                id = #{id}
+                <if test="gradeSubjectId!=null">
+                   ,grade_subject_id = #{gradeSubjectId}
+                </if>
+                <if test="siteId!=null">
+                   ,site_id = #{siteId}
+                </if>
+                <if test="sectionId!=null">
+                   ,section_id = #{sectionId}
+                </if>
+                <if test="gradeId!=null">
+                   ,grade_id = #{gradeId}
+                </if>
+                <if test="subjectId!=null">
+                   ,subject_id = #{subjectId}
+                </if>
+                <if test="name!=null">
+                   ,name = #{name}
+                </if>
+                <if test="sort!=null">
+                   ,sort = #{sort}
+                </if>
+                <if test="createDate!=null">
+                   ,create_date = #{createDate}
+                </if>
+                <if test="createBy!=null">
+                   ,create_by = #{createBy}
+                </if>
+                <if test="updateDate!=null">
+                   ,update_date = #{updateDate}
+                </if>
+                <if test="updateBy!=null">
+                   ,update_by = #{updateBy}
+                </if>
+                <if test="delFlag!=null">
+                   ,del_flag = #{delFlag}
+                </if>
+        where id = #{id}
+    </update>
+
+    <select id="findList" resultType="cn.sparke.modules.chapter.entity.ChapterEntity">
+        select
+              tb_chapter.id,
+              tb_chapter.grade_subject_id,
+              tb_chapter.site_id,
+              tb_chapter.section_id,
+              tb_chapter.grade_id,
+              tb_chapter.subject_id,
+              tb_chapter.name,
+              tb_chapter.sort,
+              tb_chapter.create_date,
+              tb_chapter.create_by,
+              tb_chapter.update_date,
+              tb_chapter.update_by,
+              tb_chapter.del_flag
+         from tb_chapter
+        where 1=1
+            <if test="id!=null and id!=''">
+              and  tb_chapter.id = #{id}
+            </if>
+            <if test="gradeSubjectId!=null and gradeSubjectId!=''">
+              and  tb_chapter.grade_subject_id = #{gradeSubjectId}
+            </if>
+            <if test="siteId!=null and siteId!=''">
+              and  tb_chapter.site_id = #{siteId}
+            </if>
+            <if test="sectionId!=null and sectionId!=''">
+              and  tb_chapter.section_id = #{sectionId}
+            </if>
+            <if test="gradeId!=null and gradeId!=''">
+              and  tb_chapter.grade_id = #{gradeId}
+            </if>
+            <if test="subjectId!=null and subjectId!=''">
+              and  tb_chapter.subject_id = #{subjectId}
+            </if>
+            <if test="name!=null and name!=''">
+              and  tb_chapter.name = #{name}
+            </if>
+            <if test="sort!=null and sort!=''">
+              and  tb_chapter.sort = #{sort}
+            </if>
+            <if test="createDate!=null and createDate!=''">
+              and  tb_chapter.create_date = #{createDate}
+            </if>
+            <if test="createBy!=null and createBy!=''">
+              and  tb_chapter.create_by = #{createBy}
+            </if>
+            <if test="updateDate!=null and updateDate!=''">
+              and  tb_chapter.update_date = #{updateDate}
+            </if>
+            <if test="updateBy!=null and updateBy!=''">
+              and  tb_chapter.update_by = #{updateBy}
+            </if>
+                and  tb_chapter.del_flag = 0
+    </select>
+
+
+    <select id="getById" resultType="cn.sparke.modules.chapter.entity.ChapterEntity">
+        select
+              tb_chapter.id,
+              tb_chapter.grade_subject_id,
+              tb_chapter.site_id,
+              tb_chapter.section_id,
+              tb_chapter.grade_id,
+              tb_chapter.subject_id,
+              tb_chapter.name,
+              tb_chapter.sort,
+              tb_chapter.create_date,
+              tb_chapter.create_by,
+              tb_chapter.update_date,
+              tb_chapter.update_by,
+              tb_chapter.del_flag
+        from tb_chapter
+        where id = #{id}
+            and  tb_chapter.del_flag = 0
+    </select>
+
+    <select id="get" resultType="cn.sparke.modules.chapter.entity.ChapterEntity">
+        select
+              tb_chapter.id,
+              tb_chapter.grade_subject_id,
+              tb_chapter.site_id,
+              tb_chapter.section_id,
+              tb_chapter.grade_id,
+              tb_chapter.subject_id,
+              tb_chapter.name,
+              tb_chapter.sort,
+              tb_chapter.create_date,
+              tb_chapter.create_by,
+              tb_chapter.update_date,
+              tb_chapter.update_by,
+              tb_chapter.del_flag
+        from tb_chapter
+        where 1=1
+            <if test="id!=null and id!=''">
+                and  tb_chapter.id = #{id}
+            </if>
+            <if test="gradeSubjectId!=null and gradeSubjectId!=''">
+                and  tb_chapter.grade_subject_id = #{gradeSubjectId}
+            </if>
+            <if test="siteId!=null and siteId!=''">
+                and  tb_chapter.site_id = #{siteId}
+            </if>
+            <if test="sectionId!=null and sectionId!=''">
+                and  tb_chapter.section_id = #{sectionId}
+            </if>
+            <if test="gradeId!=null and gradeId!=''">
+                and  tb_chapter.grade_id = #{gradeId}
+            </if>
+            <if test="subjectId!=null and subjectId!=''">
+                and  tb_chapter.subject_id = #{subjectId}
+            </if>
+            <if test="name!=null and name!=''">
+                and  tb_chapter.name = #{name}
+            </if>
+            <if test="sort!=null and sort!=''">
+                and  tb_chapter.sort = #{sort}
+            </if>
+            <if test="createDate!=null and createDate!=''">
+                and  tb_chapter.create_date = #{createDate}
+            </if>
+            <if test="createBy!=null and createBy!=''">
+                and  tb_chapter.create_by = #{createBy}
+            </if>
+            <if test="updateDate!=null and updateDate!=''">
+                and  tb_chapter.update_date = #{updateDate}
+            </if>
+            <if test="updateBy!=null and updateBy!=''">
+                and  tb_chapter.update_by = #{updateBy}
+            </if>
+            and  tb_chapter.del_flag = 0
+         limit 1
+     </select>
+
+      <update id="deleteById">
+            update tb_chapter
+            set del_flag = 1
+            where id = #{id}
+      </update>
+</mapper>
